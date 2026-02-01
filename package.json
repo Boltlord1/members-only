@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.17.2"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+    "env": "node --env-file=.env src/app.js",
+    "pop": "node --env-file=.env src/database/populate.js",
+    "tab": "node --env-file=.env src/database/tables.js"
+  }
+}
