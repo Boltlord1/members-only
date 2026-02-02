@@ -3,9 +3,9 @@ import pool from './pool.js'
 const member = `
 CREATE TABLE IF NOT EXISTS member (
     mem_id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    mem_name varchar ( 255 ),
+    mem_name varchar ( 255 ) UNIQUE,
     mem_hash varchar ( 255 ),
-    mem_email varchar ( 255 ),
+    mem_email varchar ( 255 ) UNIQUE,
     mem_admin boolean DEFAULT FALSE
 );
 `
