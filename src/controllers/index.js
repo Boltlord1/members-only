@@ -1,5 +1,7 @@
 import { validationResult, matchedData } from 'express-validator'
+import { hash } from 'bcrypt'
 import { varchar, email } from '../validate.js'
+import { insertMember, verifyMember } from '../database/queries.js'
 
 async function postSignUpLast(req, res) {
     const errors = validationResult(req)
@@ -8,16 +10,12 @@ async function postSignUpLast(req, res) {
         return
     }
     const { mem_name, mem_email, mem_password, mem_confirm } = matchedData(req)
-    res.redirect('/')
-}
-
-async function postLogInLast(req, res) {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
+    if (mem_password !== mem_confirm) {
         res.redirect('/invalid')
         return
     }
-    const { mem_identity, mem_password } = matchedData(req)
+    const mem_hash = await hash(mem_password, 10)
+    await insertMember(mem_name, mem_hash, mem_email)
     res.redirect('/')
 }
 
@@ -29,13 +27,25 @@ const postSignUp = [
     postSignUpLast
 ]
 
-const postLogIn = [
-    varchar('mem_identity'),
-    varchar('mem_password'),
-    postLogInLast
-]
+async function getVerify(req, res) {
+    if (!req.user) {
+        res.redirect('/invalid')
+        return
+    }
+    res.render('verify')
+}
+
+async function postVerify(req, res) {
+    if (req.body.verify !== process.env.VERIFY_PASS) {
+        res.redirect('/invalid')
+        return
+    }
+    await verifyMember(req.user.mem_id)
+    res.redirect('/')
+}
 
 export default {
     postSignUp,
-    postLogIn
+    getVerify,
+    postVerify
 }

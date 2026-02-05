@@ -6,7 +6,7 @@ function varchar(name) {
         .notEmpty()
         .withMessage('Name must not be empty.')
         .isLength({ max: 256 })
-        .withMessage('Name can not be more than 256 characters.')
+        .withMessage('Name must not be more than 256 characters.')
 }
 
 function email(name) {
@@ -17,7 +17,7 @@ function email(name) {
         .isEmail()
         .withMessage('Invalid text for email.')
         .isLength({ max: 256 })
-        .withMessage('Email can not be more than 256 characters.')
+        .withMessage('Email must not be more than 256 characters.')
 }
 
 function bool(name) {
@@ -29,6 +29,8 @@ function bool(name) {
 function text(name) {
     return body(name)
         .trim()
+        .notEmpty()
+        .withMessage('Message body must not be empty.')
 }
 
 export {

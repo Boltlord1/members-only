@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS member (
     mem_name varchar ( 255 ) UNIQUE,
     mem_hash varchar ( 255 ),
     mem_email varchar ( 255 ) UNIQUE,
+    mem_verified boolean DEFAULT FALSE,
     mem_admin boolean DEFAULT FALSE
 );
 `

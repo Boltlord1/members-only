@@ -7,7 +7,19 @@
 </head>
 <body>
     Members Only
+    <% if (locals.user) { %>
+        <p><%= user.mem_name %></p>
+        <% if (user.mem_verified) { %>
+            <p>Verified</p>
+        <% } else { %>
+            <p>Not verified</p>
+            <a href="/verify">Verify</a>
+        <% } %>
+    <% } else { %>
+        <p>Not logged in</p>
+    <% } %>
     <a href="/login">Log in</a>
     <a href="/signup">Sign up</a>
+    <p><a href="/message">Message Board</a></p>
 </body>
 </html>

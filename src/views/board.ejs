@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Board</title>
+</head>
+<body>
+    <a href="/">Return to Index</a>
+    <% if (logged) { %>
+        <a href="/message/new">New Message</a>
+    <% } %>
+    <% for (const msg of messages) { %>
+        <div>
+            <h2><%= msg.msg_head %></h2>
+            <p><%= msg.msg_text %></p>
+            <div>
+                <p><%= msg.mem_name %></p>
+                <p><%= msg.msg_date %></p>
+            </div>
+        </div>
+    <% } %>
+</body>
+</html>
