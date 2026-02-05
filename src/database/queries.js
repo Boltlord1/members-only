@@ -6,7 +6,7 @@ async function insertMember(name, hash, email) {
 }
 
 async function getAllMessages(verified = false) {
-    const { rows } = verified ? await pool.query('SELECT mem_name, msg_head, msg_text, msg_date FROM message JOIN member ON member.mem_id = message.mem_id') :
+    const { rows } = verified ? await pool.query('SELECT msg_id, mem_name, msg_head, msg_text, msg_date FROM message JOIN member ON member.mem_id = message.mem_id') :
     await pool.query('SELECT msg_head, msg_text FROM message')
 
     if (verified === false) {
@@ -28,9 +28,14 @@ async function insertMessage(id, header, body) {
         [id, header, body, new Date()])
 }
 
+async function deleteMessage(id) {
+    await pool.query('DELETE FROM message WHERE msg_id = $1', [id])
+}
+
 export {
     insertMember,
     getAllMessages,
     verifyMember,
-    insertMessage
+    insertMessage,
+    deleteMessage
 }

@@ -18,6 +18,11 @@
                 <p><%= msg.mem_name %></p>
                 <p><%= msg.msg_date %></p>
             </div>
+            <% if (admin) { %>
+                <form action=<%- `message/delete/${msg.msg_id}` %> method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            <% } %>
         </div>
     <% } %>
 </body>

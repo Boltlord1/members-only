@@ -9,7 +9,9 @@
     Members Only
     <% if (locals.user) { %>
         <p><%= user.mem_name %></p>
-        <% if (user.mem_verified) { %>
+        <% if (user.mem_admin) { %>
+            <p>Admin</p>
+        <% } else if (user.mem_verified) { %>
             <p>Verified</p>
         <% } else { %>
             <p>Not verified</p>
