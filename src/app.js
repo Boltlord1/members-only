@@ -6,7 +6,7 @@ import indexRouter from './routes/index.js'
 import messageRouter from './routes/message.js'
 
 const app = express()
-app.set('views', path.join(import.meta.dirname, 'views'))
+app.set('views', path.join(process.cwd(), 'src/views'))
 app.set('view engine', 'ejs')
 
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: false }))
